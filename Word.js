@@ -19,13 +19,17 @@ Word.prototype.returnString = function (){
 
 //function that takes the character argument and calls the guess founciton oneach letter
 Word.prototype.processGuess = function(char){
+    
     this.letterArray.forEach(element => {
-        if(element.character === char){
+        console.log("input char "+ char)
+        console.log("obj char " + element.character)
+        
+        if(element.character.trim() === char.trim()){
             element.guessed = true;
+            console.log("changed flag")
         }
     });
 }
-
 
 
 //Test
