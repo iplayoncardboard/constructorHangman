@@ -1,4 +1,4 @@
-let wordArray = ['cats', 'tacos', 'antidisestablishmentarianism', 'santa']
+let wordArray = ['cats'] //, 'tacos', 'antidisestablishmentarianism', 'santa'];
 
 function getWord (){
     return wordArray[generateRandomWord()]
