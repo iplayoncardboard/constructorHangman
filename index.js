@@ -4,6 +4,7 @@ const inquirer = require('inquirer')
 
 
 let remainingGuesses = 10;
+let guessArray = [];
 
 //Generate a random word
 let currentWord = new Word(randomWord());
@@ -13,21 +14,29 @@ let currentWord = new Word(randomWord());
 console.log(currentWord.returnString());
 //ask user to guess a letter
 inquirer.prompt({
-    name: 'quetion1',
+    name: 'question1',
     message: 'Guess a letter!'
-}).then((guess) =>{console.log('test complete')
+}).then((guess) =>{
+    //test
+    // console.log('test complete: '+ JSON.stringify(guess));
 
 //process guess
-console.log(currentWord);
-currentWord.processGuess(guess);
-//If !_ remaining player wins. work in progress fix this logic
-    if(currentWord.array.forEach(element => {
-        element.guessed;
+    if (!guessArray.includes(guess.question1)){
+        remainingGuesses--;
+         currentWord.processGuess(guess.question1);
+         console.log(currentWord.correct);
     }
-    ))
-    {
-        console.log("winner");
-    };
+
+    
+    
+//If !_ remaining player wins. work in progress fix this logic
+    // if(currentWord.array.forEach(element => {
+    //     element.guessed;
+    // }
+    // ))
+    // {
+    //     console.log("winner");
+    // };
     //Display win message 
     //pick a new word
     //reset remaining guesses to 10
