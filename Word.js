@@ -16,11 +16,12 @@ Word.prototype.returnString = function (){
     });
     return string;
 }
-    
+
+let correctGuesses = 0;
 
 //function that takes the character argument and calls the guess founciton oneach letter
 Word.prototype.processGuess = function(char){
-    let correctGuesses = 0;
+    
     this.letterArray.forEach(element => {
         //TEST
         // console.log("input char "+ char)
@@ -28,12 +29,13 @@ Word.prototype.processGuess = function(char){
         
         if(element.character.trim() === char.trim()){
             element.guessed = true;
-            correctGuesses +=1;
+            correctGuesses++;
+            if(correctGuesses === this.letterArray.length){
+                console.log("entering correct to true statement")
+                this.correct = true;
+            }
         }
     });
-    if(correctGuesses === this.letterArray.length){
-        this.correct = true;
-    }
 }
 
 

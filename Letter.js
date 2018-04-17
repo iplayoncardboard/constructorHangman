@@ -2,7 +2,7 @@
 
 function Letter  (character){
         this.character = character + " ";
-        guessed: false;
+        this.guessed = false;
 }
 
 Letter.prototype.display = function (){

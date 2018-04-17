@@ -10,42 +10,80 @@ let guessArray = [];
 let currentWord = new Word(randomWord());
 // console.log(currentWord);
 
-//display _____ of word
-console.log(currentWord.returnString());
-//ask user to guess a letter
+resetGame()
+
+userGuess();
+
+function userGuess(){
+    displayGameStats();
+    console.log("correct: "+currentWord.correct);
+    //ask user to guess a letter
 inquirer.prompt({
     name: 'question1',
     message: 'Guess a letter!'
 }).then((guess) =>{
-    //test
-    // console.log('test complete: '+ JSON.stringify(guess));
-
-//process guess
-    if (!guessArray.includes(guess.question1)){
-        remainingGuesses--;
-         currentWord.processGuess(guess.question1);
-         console.log(currentWord.correct);
+    let letterGuessed = guess.question1.charCodeAt(0)
+    //validate that one character was entered
+    if((guess.question1.length > 1)){ 
+        return userGuess();
+    }
+    // validate that the letter is upper or lowercase.
+    if(letterGuessed >= 65 && letterGuessed  <= 90 || letterGuessed  >= 97 && letterGuessed  <= 122)
+    {
+        let charGuessed = guess.question1.toLowerCase();
+        if (!guessArray.includes(charGuessed)){
+            remainingGuesses--;
+            currentWord.processGuess(charGuessed);
+            checkForWin();
+        }
+    
+        else{
+            remainingGuesses--;
+            displayGameStats();
+        }
     }
 
-    
-    
-//If !_ remaining player wins. work in progress fix this logic
-    // if(currentWord.array.forEach(element => {
-    //     element.guessed;
-    // }
-    // ))
-    // {
-    //     console.log("winner");
-    // };
-    //Display win message 
-    //pick a new word
-    //reset remaining guesses to 10
+    else{
+        return userGuess();
+    }
+//process guess
+ 
 
-// else if guesses < 0
-    // decrement guesses 
-    //use word method to check guess
+});}
 
-// else display lose message
-    //reset remaining guesses to 10
+
+function displayGameStats(){
+    //display _____ of word
+    console.log('Guesses Remaining: '+ remainingGuesses);
+    console.log(currentWord.returnString());
+}
+
+function winGame(){
+    displayGameStats();
+    console.log("Winner")
+}
+
+function loseGame(){
+    console.log("LOSER!!!")
+
+}
+
+function resetGame(){
+    currentWord = new Word(randomWord());
+        //reset remaining guesses to 10
+    remainingGuesses = Math.floor(1.5*currentWord.letterArray.length);
     ////pick a new word
-});
+    
+}
+
+function checkForWin(){
+    if(currentWord.correct){
+        winGame();
+    }
+    else if(remainingGuesses === 0){
+        loseGame();
+    }
+    else{
+        userGuess();
+    }
+}
