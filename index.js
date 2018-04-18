@@ -61,10 +61,14 @@ function displayGameStats(){
 function winGame(){
     displayGameStats();
     console.log("Winner")
+    resetGame()
+    userGuess();
 }
 
 function loseGame(){
     console.log("LOSER!!!")
+    resetGame()
+    userGuess();
 
 }
 
